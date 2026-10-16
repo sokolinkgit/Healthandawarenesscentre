@@ -217,37 +217,33 @@ p { margin: 0 0 1em; }
 .slide.active { opacity: 1; transform: none; pointer-events: auto; }
 .slide.prev { opacity: 0; transform: scale(.96) translateX(-28px); }
 
-/* product slide */
-.slide-product {
-  display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 22px 18px 74px;
-  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 45%), linear-gradient(150deg, var(--c1), var(--c2));
-}
-.slide-product .cat-tag {
-  align-self: flex-start; padding: 5px 11px; border-radius: 999px; background: rgba(0,0,0,.25); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
-}
-.slide-product .slide-bottle { animation: bottleFloat 4s ease-in-out infinite; }
-.slide-product .bottle-lg { width: 100px; height: 160px; }
-.slide-product .bottle-lg .cap { width: 46px; height: 24px; }
-.slide-product .bottle-lg .neck { top: 22px; width: 32px; height: 14px; }
-.slide-product .bottle-lg .body { top: 34px; }
-@keyframes bottleFloat { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
-.slide-info { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #fff; }
-.slide-info h4 { margin: 0; font-size: 15px; line-height: 1.2; }
-.slide-info .price { font-weight: 800; font-size: 14px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.3); }
-
-/* transformation slide */
+/* transformation slide: weight-loss before & after */
 .slide-transform { overflow: hidden; }
-.slide-transform img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transform: scale(1.12); transition: transform 6s linear; }
-.slide.active.slide-transform img { transform: scale(1); }
-.slide-transform::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,28,26,.95) 0%, rgba(4,28,26,.2) 55%, transparent 100%); }
+.slide-transform .ba { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; }
+.slide-transform .ba-half { position: relative; margin: 0; overflow: hidden; }
+.slide-transform .ba-after { border-left: 3px solid rgba(255,255,255,.9); }
+.slide-transform .ba-half img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 25%;
+  transform: scale(1.1); transition: transform 6s linear;
+}
+.slide.active.slide-transform .ba-half img { transform: scale(1); }
+.slide-transform .ba-half figcaption {
+  position: absolute; top: 46px; left: 50%; transform: translateX(-50%); z-index: 2;
+  padding: 4px 12px; border-radius: 999px; background: rgba(0,0,0,.55); color: #fff;
+  font-size: 10.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; white-space: nowrap;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.slide-transform .ba-after figcaption { background: var(--wa); }
+.slide-transform::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,28,26,.95) 0%, rgba(4,28,26,.25) 55%, transparent 100%); }
 .transform-text { position: absolute; left: 18px; right: 18px; bottom: 74px; z-index: 2; color: #fff; }
+.lost-chip {
+  display: inline-block; padding: 5px 13px; border-radius: 999px; margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: var(--ink);
+  font-family: "Outfit", sans-serif; font-size: 12.5px; font-weight: 800; letter-spacing: .3px;
+}
 .transform-text .quote { font-size: 15px; font-weight: 500; line-height: 1.4; margin: 6px 0 8px; }
 .transform-text .who { font-size: 13px; color: #9fe6da; font-weight: 700; }
-.transform-tag {
-  position: absolute; top: 14px; left: 14px; z-index: 2; padding: 5px 11px; border-radius: 999px;
-  background: var(--accent); color: var(--ink); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .4px;
-}
-.illustrative { position: absolute; top: 14px; right: 14px; z-index: 2; font-size: 10px; color: #fff; background: rgba(0,0,0,.4); padding: 3px 8px; border-radius: 999px; }
+.transform-text .illustrative { display: block; margin-top: 5px; font-size: 10px; color: rgba(255,255,255,.6); }
 .stars { color: var(--accent-2); letter-spacing: 2px; font-size: 13px; }
 
 .showcase-top {
@@ -333,16 +329,14 @@ select:focus { outline: 3px solid rgba(20,184,166,.3); }
 .product-card:hover { box-shadow: var(--shadow-lg); }
 @keyframes cardIn { from { opacity: 0; transform: translateY(24px) scale(.97); } to { opacity: 1; transform: none; } }
 .card-visual {
-  position: relative; height: 140px; display: grid; place-items: center; overflow: hidden;
-  background: radial-gradient(circle at 50% 30%, rgba(255,255,255,.5), transparent 60%), linear-gradient(150deg, var(--c1), var(--c2));
+  position: relative; height: 150px; overflow: hidden;
+  background: linear-gradient(150deg, var(--c1), var(--c2));
 }
-.card-visual::after {
-  content: ""; position: absolute; width: 140%; height: 40%; bottom: -20%; left: -20%; border-radius: 50%;
-  background: rgba(255,255,255,.18); transition: transform .8s var(--ease);
+.card-img {
+  width: 100%; height: 100%; object-fit: cover; display: block; background: #fff;
+  transition: transform .7s var(--ease);
 }
-.product-card:hover .card-visual::after { transform: translateX(20%) scale(1.1); }
-.bottle-wrap { transition: transform .6s var(--ease); }
-.product-card:hover .bottle-wrap { transform: translateY(-6px) scale(1.06) rotate(-3deg); }
+.product-card:hover .card-img { transform: scale(1.06); }
 
 .badge {
   position: absolute; top: 10px; left: 10px; z-index: 2; padding: 4px 9px; border-radius: 999px; font-size: 10px; font-weight: 800;
@@ -358,27 +352,6 @@ select:focus { outline: 3px solid rgba(20,184,166,.3); }
 .card-actions { display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 10px; width: 100%; }
 .card-actions .btn { padding: 9px 10px; font-size: 12px; }
 .empty { text-align: center; color: var(--muted); padding: 30px 0; }
-
-/* bottle illustration (pure CSS) */
-.bottle { position: relative; width: 74px; height: 118px; }
-.bottle .cap { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 34px; height: 18px; border-radius: 6px 6px 3px 3px; background: linear-gradient(90deg, #1f2937, #4b5563, #1f2937); }
-.bottle .neck { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); width: 24px; height: 12px; background: linear-gradient(90deg, rgba(255,255,255,.5), rgba(255,255,255,.85), rgba(255,255,255,.5)); }
-.bottle .body {
-  position: absolute; top: 26px; left: 0; right: 0; bottom: 0; border-radius: 20px 20px 14px 14px; overflow: hidden;
-  background: linear-gradient(90deg, rgba(0,0,0,.2), rgba(255,255,255,.35) 20%, rgba(255,255,255,.1) 50%, rgba(0,0,0,.2)), linear-gradient(180deg, var(--c2), var(--c1));
-  box-shadow: inset 0 -10px 18px rgba(0,0,0,.25), 0 14px 24px -10px rgba(0,0,0,.45);
-}
-.bottle .body::before { content: ""; position: absolute; top: 8px; left: 8px; width: 7px; height: 60%; border-radius: 6px; background: rgba(255,255,255,.45); filter: blur(.5px); }
-.bottle .label {
-  position: absolute; left: 7px; right: 7px; top: 42%; height: 40%; border-radius: 6px; background: rgba(255,255,255,.94);
-  display: grid; place-items: center; padding: 3px; text-align: center; font-size: 6.5px; font-weight: 800; line-height: 1.15; color: var(--ink); text-transform: uppercase; letter-spacing: .3px; overflow: hidden;
-}
-.bottle-lg { width: 110px; height: 176px; }
-.bottle-lg .cap { width: 50px; height: 26px; }
-.bottle-lg .neck { top: 24px; width: 36px; height: 16px; }
-.bottle-lg .body { top: 38px; }
-.bottle-lg .label { font-size: 9.5px; }
-.bottle-lg .body::before { width: 10px; }
 
 /* ---------- ABOUT ---------- */
 .about-grid { display: grid; gap: 32px; align-items: center; }
@@ -503,12 +476,8 @@ a.info-card:hover { border-color: var(--brand-2); }
   display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--line);
   animation: cardIn .4s var(--ease) backwards;
 }
-.cart-item .mini { width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(150deg, var(--c1), var(--c2)); overflow: hidden; }
-.cart-item .mini .bottle { width: 26px; height: 42px; }
-.cart-item .mini .bottle .cap { width: 12px; height: 6px; }
-.cart-item .mini .bottle .neck { top: 6px; width: 8px; height: 4px; }
-.cart-item .mini .bottle .body { top: 9px; }
-.cart-item .mini .bottle .label { display: none; }
+.cart-item .mini { width: 56px; height: 56px; border-radius: 14px; overflow: hidden; background: #eef7f4; flex: 0 0 auto; }
+.cart-item .mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cart-item h4 { margin: 0 0 2px; font-size: 13.5px; font-family: "Outfit", sans-serif; color: var(--ink); line-height: 1.2; }
 .cart-item .unit { font-size: 12px; color: var(--muted); }
 .qty { display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; }
@@ -562,11 +531,7 @@ a.info-card:hover { border-color: var(--brand-2); }
   .hero-inner { grid-template-columns: 1.1fr .9fr; gap: 56px; }
   .hero h1 { font-size: clamp(2.8rem, 5.2vw, 4.4rem); }
   .showcase { height: 520px; }
-  .slide-product .bottle-lg { width: 128px; height: 200px; }
-  .slide-product .bottle-lg .cap { width: 56px; height: 30px; }
-  .slide-product .bottle-lg .neck { top: 28px; width: 40px; height: 18px; }
-  .slide-product .bottle-lg .body { top: 46px; }
-  .slide-product .bottle-lg .label { font-size: 10.5px; }
+  .card-visual { height: 200px; }
   .fc-1, .fc-2 { display: flex; }
   .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .section { padding: 96px 0; }
@@ -574,8 +539,6 @@ a.info-card:hover { border-color: var(--brand-2); }
   .about-media img { height: 480px; }
   .contact-grid { grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
   .stats { margin-top: 56px; }
-  .bottle { width: 84px; height: 132px; }
-  .bottle-lg { width: 128px; height: 200px; }
 }
 
 /* Hide the desktop "Order" WhatsApp float text overlap on very small screens */
@@ -590,6 +553,10 @@ a.info-card:hover { border-color: var(--brand-2); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+  .hero-glow { display: none; }
+}
+croll-behavior: auto; }
   .reveal { opacity: 1; transform: none; }
   .hero-glow { display: none; }
 }

@@ -11,7 +11,7 @@
     Google Business Profile (only publish reviews you can verify).
   - TRANSFORMATION photos are AI-generated illustrative before/after
     images. Replace them with real, consented customer photos, or keep
-    the "Illustrative photos" label on the slideshow.
+    the AI-generated illustrations label on the slideshow.
 */
 window.HAC = {
   phone: "0768 897 642",

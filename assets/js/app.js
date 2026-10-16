@@ -358,24 +358,21 @@
   $("#sortSelect").addEventListener("change", function (e) { state.sort = e.target.value; renderProducts(); });
   renderProducts();
 
-  // ---------- HERO SLIDESHOW (customer weight-loss transformations) ----------
+  // ---------- HERO SLIDESHOW (AI-generated weight-loss illustrations) ----------
   var slidesEl = $("#slides");
   var dotsEl = $("#dots");
   var counterEl = $("#slideCounter");
   var bar = $("#progressBar");
   var showcase = $("#showcase");
 
-  var slideHTML = D.transformations.map(function (tr) {
+  var slideHTML = D.transformations.map(function (tr, i) {
     return '<div class="slide slide-transform">' +
       '<div class="ba">' +
-      '<figure class="ba-half ba-before"><img src="' + tr.before + '" alt="' + esc(tr.name) + ' from ' + esc(tr.city) + ' before losing weight" loading="lazy" /><figcaption>Before</figcaption></figure>' +
-      '<figure class="ba-half ba-after"><img src="' + tr.after + '" alt="' + esc(tr.name) + ' from ' + esc(tr.city) + ' after losing weight" loading="lazy" /><figcaption>After</figcaption></figure>' +
+      '<figure class="ba-half ba-before"><img src="' + tr.before + '" alt="AI-generated adult before weight loss" loading="' + (i === 0 ? 'eager' : 'lazy') + '" /><figcaption>Before</figcaption></figure>' +
+      '<figure class="ba-half ba-after"><img src="' + tr.after + '" alt="AI-generated same adult after illustrative weight loss" loading="' + (i === 0 ? 'eager' : 'lazy') + '" /><figcaption>After</figcaption></figure>' +
       "</div>" +
       '<div class="transform-text">' +
-      '<span class="lost-chip">−' + esc(tr.lost) + " in " + esc(tr.period) + "</span>" +
-      '<p class="quote">“' + esc(tr.quote) + '”</p>' +
-      '<span class="who">' + esc(tr.name) + " · " + esc(tr.city) + "</span>" +
-      '<span class="illustrative">Illustrative photos</span>' +
+      '<span class="illustrative">AI-generated illustrations · Not actual customer results</span>' +
       "</div></div>";
   }).join("");
   slidesEl.innerHTML = slideHTML;

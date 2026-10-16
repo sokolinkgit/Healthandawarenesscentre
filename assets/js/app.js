@@ -38,13 +38,6 @@
   };
   var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function bottleHTML(p, large) {
-    var words = p.name.split(" ").slice(0, 3).join(" ");
-    return '<div class="bottle' + (large ? " bottle-lg" : "") + '" aria-hidden="true">' +
-      '<span class="cap"></span><span class="neck"></span>' +
-      '<div class="body"><span class="label">' + esc(words) + "</span></div></div>";
-  }
-
   function starsHTML(n) {
     var s = "";
     for (var i = 1; i <= 5; i++) s += i <= n ? "★" : "☆";
@@ -211,7 +204,7 @@
     }
     cartBody.innerHTML = lines.map(function (l) {
       return '<div class="cart-item" data-id="' + l.p.id + '">' +
-        '<div class="mini" style="--c1:' + l.p.color[0] + ';--c2:' + l.p.color[1] + '">' + bottleHTML(l.p) + "</div>" +
+        '<div class="mini"><img src="' + l.p.image + '" alt="" loading="lazy" /></div>' +
         '<div><h4>' + esc(l.p.name) + '</h4><div class="unit">' + fmt(l.p.price) + ' each</div>' +
         '<div class="qty"><button data-act="dec" aria-label="Decrease">−</button><span>' + l.qty +
         '</span><button data-act="inc" aria-label="Increase">+</button></div></div>' +
@@ -337,7 +330,8 @@
       ";--d:" + Math.min(i * 60, 600) + 'ms" data-id="' + p.id + '">' +
       '<div class="card-visual">' +
       (p.rx ? '<span class="badge rx">Consult first</span>' : "") +
-      '<div class="bottle-wrap">' + bottleHTML(p) + "</div></div>" +
+      '<img class="card-img" src="' + p.image + '" alt="' + esc(p.name) + '" loading="lazy" />' +
+      "</div>" +
       '<div class="card-body">' +
       '<span class="card-cat">' + esc(p.category) + "</span>" +
       '<h3 class="card-name">' + esc(p.name) + "</h3>" +
@@ -364,37 +358,25 @@
   $("#sortSelect").addEventListener("change", function (e) { state.sort = e.target.value; renderProducts(); });
   renderProducts();
 
-  // ---------- HERO SLIDESHOW (products + happy customer transformations) ----------
+  // ---------- HERO SLIDESHOW (customer weight-loss transformations) ----------
   var slidesEl = $("#slides");
   var dotsEl = $("#dots");
   var counterEl = $("#slideCounter");
   var bar = $("#progressBar");
   var showcase = $("#showcase");
 
-  var items = [];
-  var t = 0;
-  D.products.forEach(function (p, i) {
-    items.push({ type: "product", p: p });
-    if ((i + 1) % 4 === 0 && t < D.transformations.length) items.push({ type: "transform", t: D.transformations[t++] });
-  });
-
-  var slideHTML = items.map(function (it) {
-    if (it.type === "product") {
-      var p = it.p;
-      return '<div class="slide slide-product" style="--c1:' + p.color[0] + ';--c2:' + p.color[1] + '">' +
-        '<span class="cat-tag">' + esc(p.category) + "</span>" +
-        '<div class="slide-bottle">' + bottleHTML(p, true) + "</div>" +
-        '<div class="slide-info"><div><h4>' + esc(p.name) + '</h4><span class="price">' + fmt(p.price) + "</span></div>" +
-        '<a class="btn btn-wa btn-sm" href="' + waLink(productMessage(p)) + '" target="_blank" rel="noopener">Order</a></div>' +
-        "</div>";
-    }
-    var tr = it.t;
+  var slideHTML = D.transformations.map(function (tr) {
     return '<div class="slide slide-transform">' +
-      '<img src="' + tr.image + '" alt="Happy customer ' + esc(tr.name) + ' from ' + esc(tr.city) + '" loading="lazy" />' +
-      '<span class="transform-tag">Transformation</span>' +
-      '<span class="illustrative">Illustrative photo</span>' +
-      '<div class="transform-text"><div class="stars">★★★★★</div><p class="quote">“' + esc(tr.quote) + '”</p>' +
-      '<span class="who">' + esc(tr.name) + " · " + esc(tr.city) + "</span></div></div>";
+      '<div class="ba">' +
+      '<figure class="ba-half ba-before"><img src="' + tr.before + '" alt="' + esc(tr.name) + ' from ' + esc(tr.city) + ' before losing weight" loading="lazy" /><figcaption>Before</figcaption></figure>' +
+      '<figure class="ba-half ba-after"><img src="' + tr.after + '" alt="' + esc(tr.name) + ' from ' + esc(tr.city) + ' after losing weight" loading="lazy" /><figcaption>After</figcaption></figure>' +
+      "</div>" +
+      '<div class="transform-text">' +
+      '<span class="lost-chip">−' + esc(tr.lost) + " in " + esc(tr.period) + "</span>" +
+      '<p class="quote">“' + esc(tr.quote) + '”</p>' +
+      '<span class="who">' + esc(tr.name) + " · " + esc(tr.city) + "</span>" +
+      '<span class="illustrative">Illustrative photos</span>' +
+      "</div></div>";
   }).join("");
   slidesEl.innerHTML = slideHTML;
 

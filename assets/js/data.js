@@ -5,10 +5,13 @@
 
   IMPORTANT before going live:
   - PRICES are placeholders (KES). Replace them with your real prices.
+  - PRODUCT PHOTOS are AI-generated illustrative pack shots in a NeoLife
+    style. Replace them with real photos of the products you sell.
   - REVIEWS are placeholders. Replace them with real reviews from your
     Google Business Profile (only publish reviews you can verify).
-  - TRANSFORMATIONS use AI-generated illustrative portraits. Replace them
-    with real, consented customer photos or keep the "Illustrative" label.
+  - TRANSFORMATION photos are AI-generated illustrative before/after
+    images. Replace them with real, consented customer photos, or keep
+    the "Illustrative photos" label on the slideshow.
 */
 window.HAC = {
   phone: "0768 897 642",
@@ -17,12 +20,14 @@ window.HAC = {
   currency: "KES",
 
   // Products. `rx: true` marks items that need a consultation first.
+  // `image` is the pack shot shown on the product card and in the cart.
   products: [
     {
       id: "pep-recovery",
       name: "Peptide Recovery Blend",
       category: "Peptides",
       price: 4500,
+      image: "assets/img/products/pep-recovery.jpg",
       color: ["#0f766e", "#14b8a6"],
       short: "Peptide blend for recovery and general wellness support.",
       rx: false
@@ -32,6 +37,7 @@ window.HAC = {
       name: "Peptide Skin Glow Complex",
       category: "Peptides",
       price: 3800,
+      image: "assets/img/products/pep-glow.jpg",
       color: ["#7c3aed", "#c4b5fd"],
       short: "Peptide complex supporting a healthy, radiant complexion.",
       rx: false
@@ -41,6 +47,7 @@ window.HAC = {
       name: "Weight Management Capsules",
       category: "Weight Loss",
       price: 3500,
+      image: "assets/img/products/wl-capsules.jpg",
       color: ["#be123c", "#fb7185"],
       short: "Supports healthy weight management alongside a balanced diet.",
       rx: true
@@ -50,6 +57,7 @@ window.HAC = {
       name: "Appetite Balance Drops",
       category: "Weight Loss",
       price: 2900,
+      image: "assets/img/products/wl-drops.jpg",
       color: ["#c2410c", "#fdba74"],
       short: "Helps you feel fuller between meals as part of a healthy plan.",
       rx: false
@@ -59,6 +67,7 @@ window.HAC = {
       name: "Tummy Flatten Herbal Tea",
       category: "Tummy Flattening",
       price: 1800,
+      image: "assets/img/products/tummy-tea.jpg",
       color: ["#65a30d", "#bef264"],
       short: "Herbal blend that supports digestion and bloating relief.",
       rx: false
@@ -68,6 +77,7 @@ window.HAC = {
       name: "Core Slim Protein Shake",
       category: "Tummy Flattening",
       price: 3200,
+      image: "assets/img/products/core-shake.jpg",
       color: ["#ca8a04", "#fde047"],
       short: "High-protein meal shake for a filling, balanced start to your day.",
       rx: false
@@ -77,6 +87,7 @@ window.HAC = {
       name: "Prostate Health Formula",
       category: "Prostate",
       price: 4200,
+      image: "assets/img/products/prostate-formula.jpg",
       color: ["#1d4ed8", "#93c5fd"],
       short: "Supports healthy prostate function and everyday urinary comfort.",
       rx: false
@@ -86,6 +97,7 @@ window.HAC = {
       name: "Prostate Support Complex",
       category: "Prostate",
       price: 3000,
+      image: "assets/img/products/prostate-complex.jpg",
       color: ["#0e7490", "#67e8f9"],
       short: "Plant-based complex with zinc and lycopene for men's wellness.",
       rx: false
@@ -95,6 +107,7 @@ window.HAC = {
       name: "NeoLife Daily Nutrition Pack",
       category: "NeoLife",
       price: 5500,
+      image: "assets/img/products/neo-daily.jpg",
       color: ["#047857", "#6ee7b7"],
       short: "Complete daily vitamins and minerals for the whole family.",
       rx: false
@@ -104,6 +117,7 @@ window.HAC = {
       name: "NeoLife Immunity Booster",
       category: "NeoLife",
       price: 2800,
+      image: "assets/img/products/neo-immune.jpg",
       color: ["#0369a1", "#7dd3fc"],
       short: "Vitamin C and zinc blend to support your natural defences.",
       rx: false
@@ -113,6 +127,7 @@ window.HAC = {
       name: "NeoLife Energy Multivitamin",
       category: "NeoLife",
       price: 2400,
+      image: "assets/img/products/neo-energy.jpg",
       color: ["#b45309", "#fcd34d"],
       short: "B-vitamin multivitamin for everyday energy and focus.",
       rx: false
@@ -122,33 +137,55 @@ window.HAC = {
       name: "NeoLife Omega Heart Support",
       category: "NeoLife",
       price: 3400,
+      image: "assets/img/products/neo-omega.jpg",
       color: ["#9f1239", "#fda4af"],
       short: "Omega-3 fish oil to support heart and joint health.",
       rx: false
     }
   ],
 
-  categories: ["All", "Peptides", "Weight Loss", "Tummy Flattening", "Prostate", "NeoLife"],
+  // Filter chips shown above the product grid. Every product stays
+  // visible under "All", including the Peptides and NeoLife ranges.
+  categories: ["All", "Weight Loss", "Tummy Flattening", "Prostate"],
 
-  // Happy customer transformations (illustrative photos — see note above)
+  // Customer weight-loss transformations shown in the hero slideshow as
+  // before & after photos (illustrative — see note at the top of this file).
   transformations: [
     {
       name: "Wanjiru K.",
       city: "Nairobi",
-      image: "assets/img/transform-1.jpg",
-      quote: "I finally feel energetic again. The consultation helped me build a routine I can actually keep."
+      lost: "14 kg",
+      period: "4 months",
+      before: "assets/img/transform-1-before.jpg",
+      after: "assets/img/transform-1-after.jpg",
+      quote: "The appetite drops and the weekly coaching changed my habits. I feel lighter, sharper and full of energy."
     },
     {
-      name: "Brian O.",
+      name: "Otieno O.",
       city: "Kisumu",
-      image: "assets/img/transform-2.jpg",
-      quote: "The team explained everything clearly before I started. I feel stronger every single week."
+      lost: "12 kg",
+      period: "5 months",
+      before: "assets/img/transform-2-before.jpg",
+      after: "assets/img/transform-2-after.jpg",
+      quote: "My clothes fit again and my energy is back. The team checked on me every single week — that kept me going."
     },
     {
-      name: "Mama Grace",
+      name: "Chebet N.",
       city: "Nakuru",
-      image: "assets/img/transform-3.jpg",
-      quote: "Healthy eating and the daily support products have made a real difference for my whole family."
+      lost: "9 kg",
+      period: "3 months",
+      before: "assets/img/transform-3-before.jpg",
+      after: "assets/img/transform-3-after.jpg",
+      quote: "The tummy is finally going down. The herbal tea and the morning shake are part of my daily routine now."
+    },
+    {
+      name: "Mutua M.",
+      city: "Machakos",
+      lost: "16 kg",
+      period: "6 months",
+      before: "assets/img/transform-4-before.jpg",
+      after: "assets/img/transform-4-after.jpg",
+      quote: "Six months of consistency with the weight-management programme. It worked when nothing else did."
     }
   ],
 
